@@ -14,10 +14,13 @@ import pandas as pd
 
 import time
 # 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
-openai.api_key = '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'
+# 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
+# openai.api_key = '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'
 
 sumsum=''
-def summerize(paragraph,creativity,language):
+def summerize(paragraph,creativity,language,api):
+    openai.api_key = api
+
     if '=' in paragraph:
         paragraph=paragraph.split('=')
         paragraph = (paragraph[1])
@@ -85,11 +88,12 @@ st.title("Podcast Summarizer")
 form = st.form(key="user_settings")
 with form:
     para_input = st.text_input("URL", key = "link_input")
+    api_input = st.text_input("API KEY", key = "api_input")
     Creativity = st.slider('Creativity',min_value=1,max_value=10,value=3,help='Indicates The Randomness of The Summarization',)
     lang = st.selectbox('Language',options=langs)
     generate_button = form.form_submit_button("Summarize")
     if generate_button:
-        sumsum = summerize(para_input,Creativity,lang)
+        sumsum = summerize(para_input,Creativity,lang,api_input)
         st.write(sumsum)
 
     st.components.v1.html((f'<a href="https://twitter.com/intent/tweet?text={sumsum}" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'), scrolling=False)
