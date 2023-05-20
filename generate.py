@@ -1,7 +1,4 @@
-import streamlit as st
-import cohere
-import re
-co = cohere.Client('PlUWaTH2F6AkPZ3YpD0jLE7CkWsRcRClMdnvHcHh') # This is your trial API key
+# py -m pip install -r requirements.txt
 
 # This Python file uses the following encoding: utf-8
 import cohere
@@ -9,8 +6,8 @@ from googletrans import Translator
 import streamlit as st
 from youtube_transcript_api import YouTubeTranscriptApi
 
-
-co = cohere.Client('PlUWaTH2F6AkPZ3YpD0jLE7CkWsRcRClMdnvHcHh') # This is your trial API key
+CO_API_KEY='PlUWaTH2F6AkPZ3YpD0jLE7CkWsRcRClMdnvHcHh'
+co = cohere.Client(CO_API_KEY) # This is your trial API key
 
 
 
