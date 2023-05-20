@@ -13,8 +13,8 @@ import os
 import pandas as pd
 
 import time
-
-openai.api_key = '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'
+# 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
+openai.api_key = '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'
 
 sumsum=''
 def summerize(paragraph,creativity,language):
@@ -35,7 +35,7 @@ def summerize(paragraph,creativity,language):
         transcript_length = len(txtlist)
         # for t in range(0,int(transcript_length/10000)):
         #     text = txtlist[t:t+10000]
-        text=txtlist[:10000]
+        text=txtlist[:3000]
 
 
 

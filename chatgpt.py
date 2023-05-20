@@ -10,7 +10,7 @@ import pandas as pd
 
 import time
 
-openai.api_key = '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'
+openai.api_key = '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'
 
 co = cohere.Client('PlUWaTH2F6AkPZ3YpD0jLE7CkWsRcRClMdnvHcHh') # This is your trial API key
 

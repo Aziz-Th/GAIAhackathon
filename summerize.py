@@ -8,7 +8,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 co = cohere.Client('PlUWaTH2F6AkPZ3YpD0jLE7CkWsRcRClMdnvHcHh') # This is your trial API key
 
 
-transcript = YouTubeTranscriptApi.get_transcript('pJ0auP7dbcY&t')
+transcript = YouTubeTranscriptApi.get_transcript('MT8mUsrShEk')
 txtlist=[]
 for i in transcript:
     outtxt = (i['text'])
