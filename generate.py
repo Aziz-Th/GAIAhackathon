@@ -14,8 +14,13 @@ co = cohere.Client(CO_API_KEY) # This is your trial API key
 
 
 def summerize(paragraph,creativity):
-    paragraph=paragraph.split('=')
-    paragraph = (paragraph[1])
+    if '=' in paragraph:
+        paragraph=paragraph.split('=')
+        paragraph = (paragraph[1])
+    else:
+        paragraph=paragraph.split('/')
+        paragraph=paragraph[-1]
+
     transcript = YouTubeTranscriptApi.get_transcript(paragraph)
 
     txtlist = []
