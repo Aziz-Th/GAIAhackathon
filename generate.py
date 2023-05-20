@@ -20,44 +20,49 @@ def summerize(paragraph,creativity):
     else:
         paragraph=paragraph.split('/')
         paragraph=paragraph[-1]
+    try:
+        transcript = YouTubeTranscriptApi.get_transcript(paragraph,languages=['en', 'ar'])
 
-    transcript = YouTubeTranscriptApi.get_transcript(paragraph,languages=['en', 'ar'])
+        txtlist = []
+        for i in transcript:
+            outtxt = (i['text'])
+            txtlist.append(outtxt)
+        txtlist = ' '.join(txtlist)
+        transcript_length = len(txtlist)
+        # for t in range(0,int(transcript_length/10000)):
+        #     text = txtlist[t:t+10000]
+        text=txtlist[:10000]
 
-    txtlist = []
-    for i in transcript:
-        outtxt = (i['text'])
-        txtlist.append(outtxt)
-    txtlist = ' '.join(txtlist)
-    transcript_length = len(txtlist)
-    # for t in range(0,int(transcript_length/10000)):
-    #     text = txtlist[t:t+10000]
-    text=txtlist[:10000]
-    response = co.summarize(
-        text=text,
-        length='long',
-        format='paragraph',
-        model='summarize-xlarge',
-        additional_command='write it as a preview, very general, write it as a description',
-        # additional_command='Write an introductory paragraph for a blog post about language models.',
+        response = co.summarize(
+            text=text,
+            length='long',
+            format='paragraph',
+            model='summarize-xlarge',
+            additional_command='write it as a preview, very general, write it as a description',
+            # additional_command='Write an introductory paragraph for a blog post about language models.',
 
-        temperature=creativity/10,
-        extractiveness='auto',
-    )
+            temperature=creativity/10,
+            extractiveness='auto',)
+        summery = response.summary
 
-    summery = response.summary
+        translator = Translator()
+        translated = translator.translate(summery, src='en', dest='ar')
 
-    translator = Translator()
-    translated = translator.translate(summery, src='en', dest='ar')
-
-    return (translated.text)
+        return (translated.text)
+    except:
+        return "This video can't be summarized because it has no captions"
 
 
-st.title("Podcast Summerizer")
+
+
+
+
+st.title("Podcast Summarizer")
 form = st.form(key="user_settings")
 with form:
     para_input = st.text_input("URL", key = "link_input")
-    Creativity = st.slider('Creativity',min_value=1,max_value=10,value=3,help='the randomness of the summerization',)
-    generate_button = form.form_submit_button("Summerize")
+    Creativity = st.slider('Creativity',min_value=1,max_value=10,value=3,help='Indicates The Randomness of The Summarization',)
+    generate_button = form.form_submit_button("Summarize")
     if generate_button:
         sumsum = summerize(para_input,Creativity)
         st.write(sumsum)
