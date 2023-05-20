@@ -5,5 +5,8 @@ txtlist=[]
 for i in transcript:
     outtxt = (i['text'])
     txtlist.append(outtxt)
-print(txtlist[:500])
+
+txtlist = ' '.join(txtlist)
+# print(txtlist[:10000])
+print(transcript[0]['start'])
 
