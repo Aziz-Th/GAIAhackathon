@@ -21,7 +21,7 @@ def summerize(paragraph,creativity):
         paragraph=paragraph.split('/')
         paragraph=paragraph[-1]
 
-    transcript = YouTubeTranscriptApi.get_transcript(paragraph)
+    transcript = YouTubeTranscriptApi.get_transcript(paragraph,languages=['en', 'ar'])
 
     txtlist = []
     for i in transcript:
