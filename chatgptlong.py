@@ -15,10 +15,10 @@ import pandas as pd
 import time
 # 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
 # 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
-# openai.api_key = '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'
+# openai.api_key = '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'
 
 sumsum=''
-def summerize(paragraph,creativity,language,api):
+def summerize(paragraph,language,api):
     openai.api_key = api
 
     if '=' in paragraph:
@@ -68,7 +68,7 @@ def summerize(paragraph,creativity,language,api):
         else:
             lang='english'
 
-        prompt = f"you are tasked with summarizing a segment in the following podcast, Please summarize the following text in {lang} briefly,:{text}"
+        prompt = f"you are tasked with summarizing a segment in the following video, Please summarize the following text in {lang} briefly, and say what type of video is it:{text}"
 
         response = get_completion(prompt)
         return response
@@ -84,17 +84,17 @@ def summerize(paragraph,creativity,language,api):
 
 
 langs=['Arabic','English']
-st.title("Podcast Summarizer")
+st.title("NOBTHAH")
 form = st.form(key="user_settings")
 with form:
     para_input = st.text_input("URL", key = "link_input")
     api_input = st.text_input("API KEY", key = "api_input")
-    Creativity = st.slider('Creativity',min_value=1,max_value=10,value=3,help='Indicates The Randomness of The Summarization',)
+    # Creativity = st.slider('Creativity',min_value=1,max_value=10,value=3,help='Indicates The Randomness of The Summarization',)
     lang = st.selectbox('Language',options=langs)
     generate_button = form.form_submit_button("Summarize")
     if generate_button:
-        sumsum = summerize(para_input,Creativity,lang,api_input)
+        sumsum = summerize(para_input,lang,api)
         st.write(sumsum)
 
-    st.components.v1.html((f'<a href="https://twitter.com/intent/tweet?text={sumsum}" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'), scrolling=False)
+    # st.components.v1.html((f'<a href="https://twitter.com/intent/tweet?text={sumsum}" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'), scrolling=False)
 
