@@ -13,9 +13,9 @@ import os
 import pandas as pd
 
 import time
-# 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
-# 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
-# openai.api_key = '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'
+
+
+# openai.api_key = 'api here'
 
 sumsum=''
 def summerize(paragraph,language,api):
@@ -76,8 +76,10 @@ def summerize(paragraph,language,api):
 
 
 
-    except:
-        return "This video can't be summarized because it has no captions"
+    except Exception as e: print(e)
+
+        # return "This video can't be summarized because it has no captions"
+
 
 
 
@@ -89,12 +91,9 @@ form = st.form(key="user_settings")
 with form:
     para_input = st.text_input("URL", key = "link_input")
     api_input = st.text_input("API KEY", key = "api_input")
-    # Creativity = st.slider('Creativity',min_value=1,max_value=10,value=3,help='Indicates The Randomness of The Summarization',)
     lang = st.selectbox('Language',options=langs)
     generate_button = form.form_submit_button("Summarize")
     if generate_button:
-        sumsum = summerize(para_input,lang,api)
+        sumsum = summerize(para_input,lang,api_input)
         st.write(sumsum)
-
-    # st.components.v1.html((f'<a href="https://twitter.com/intent/tweet?text={sumsum}" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'), scrolling=False)
 
